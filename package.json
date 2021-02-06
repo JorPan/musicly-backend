@@ -1,0 +1,16 @@
+{
+  "name": "backmusicly",
+  "version": "1.0.0",
+  "description": "musicly app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "music",
+    "theory",
+    "piano"
+  ],
+  "author": "Jordan Panasewicz",
+  "license": "ISC"
+}
