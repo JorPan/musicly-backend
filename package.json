@@ -4,6 +4,7 @@
   "description": "musicly app",
   "main": "index.js",
   "scripts": {
+    "start": "npx knex migrate:latest && npx knex seed:run && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
