@@ -7,17 +7,19 @@ const knex = require("knex");
 const config = require("./knexfile")[process.env.NODE_ENV || "development"];
 const database = knex(config);
 
+const { Model } = require("objection");
+Model.knex(database);
+
+const Chord = require("./models/Chord");
+
 app.use(cors());
 
 app.get("/chords", (request, response) => {
-  database("chords")
-    .select()
-    .then((chords) => response.json({ chords }));
+  Chord.query().then((chords) => response.json({ chords }));
 });
 
 app.get("/chords/:id", (request, response) => {
-  database("chords")
-    .select()
+  Chord.query()
     .where({ id: request.params.id })
     .first()
     .then((chord) => response.json({ chord }));
