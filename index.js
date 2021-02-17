@@ -88,7 +88,6 @@ app.get("/lucky-charms", authenticate, (request, response) => {
 function authenticate(request, response, next) {
   const authHeader = request.get("Authorization");
   const token = authHeader.split(" ")[1];
-
   const secret = "hmmmkaythen?!";
   jwt.verify(token, secret, (error, payload) => {
     if (error) response.json({ error: error.message });
@@ -116,6 +115,26 @@ app.get("/chords/:id", (request, response) => {
     .where({ id: request.params.id })
     .first()
     .then((chord) => response.json({ chord }));
+});
+
+app.post("/chords", (request, response) => {
+  const { chord } = request.body;
+  return database("chords")
+    .insert({
+      id: chord.id,
+      name: chord.name,
+      root: chord.root,
+      symbol: chord.symbol,
+      notes: chord.notes,
+    })
+    .returning("*")
+    .then((chords) => {
+      const chord = chords[0];
+      response.json({ chord });
+    })
+    .catch((error) => {
+      response.json({ error: error.message });
+    });
 });
 
 app.listen(process.env.PORT || 4000);
