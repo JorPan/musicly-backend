@@ -1,7 +1,9 @@
 const { Model } = require("objection");
 
 class Chord extends Model {
-  static tableName = "chords";
+  static get tableName() {
+    return "chords";
+  }
 }
 
 module.exports = Chord;
